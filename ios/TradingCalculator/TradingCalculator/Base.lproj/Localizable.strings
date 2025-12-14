@@ -15,5 +15,23 @@
 "update_required_message" = "A newer version is required to continue. Please update the app.";
 "update_required_version" = "Minimum version:";
 "update_now" = "Update";
+"help_title" = "How to use the calculator";
+"help_stop_title" = "\"Stop amount\" field";
+"help_stop_text" = "Enter your desired stop-loss amount in $ that you are ready to risk according to your risk management rules.";
+"help_percent_title" = "\"Percent\" field";
+"help_percent_text" = "Enter the stop percent from your Long/Short setup. Only digits, no leading zeros or commas.";
+"help_tv_title" = "If using TradingView";
+"help_tv_text" = "Do not include the last digit of the percent shown by TradingView.";
+"help_bybit_title" = "If using Bybit";
+"help_bybit_text" = "Enter all percent digits exactly as shown, including the last one.";
+"close" = "Close";
+"help_nav_title" = "Help";
+"app_version_label" = "Version:";
+"donate_button" = "Support the project";
+"donate_title" = "Support the project";
+"donate_message" = "Help us grow and build new convenient tools. Scan the QR code to donate.";
+"donate_wallet_label" = "Wallet address";
+"donate_copy" = "Copy";
+"donate_copied" = "Copied!";
 
 

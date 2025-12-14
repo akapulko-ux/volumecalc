@@ -1,0 +1,299 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BF_FIREBASE_CORE /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = PROD_FIREBASE_CORE /* FirebaseCore */; };
+		BF_FIREBASE_RC /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = PROD_FIREBASE_RC /* FirebaseRemoteConfig */; };
+		OBJ_AppSwift /* TradingCalculatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_AppSwiftRef /* TradingCalculatorApp.swift */; };
+		OBJ_Assets /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = OBJ_AssetsRef /* Assets.xcassets */; };
+		OBJ_BaseLoc /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = OBJ_BaseLocRef /* Localizable.strings */; };
+		OBJ_ContentSwift /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_ContentSwiftRef /* ContentView.swift */; };
+		OBJ_EnLoc /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = OBJ_EnLocRef /* Localizable.strings */; };
+		OBJ_FirebaseSwift /* FirebaseConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_FirebaseSwiftRef /* FirebaseConfigurator.swift */; };
+		OBJ_GooglePlist /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = OBJ_GooglePlistRef /* GoogleService-Info.plist */; };
+		OBJ_LogicSwift /* CalculatorLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_LogicSwiftRef /* CalculatorLogic.swift */; };
+		OBJ_Privacy /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = OBJ_PrivacyRef /* PrivacyInfo.xcprivacy */; };
+		OBJ_RuLoc /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = OBJ_RuLocRef /* Localizable.strings */; };
+		OBJ_VersionSwift /* VersionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_VersionSwiftRef /* VersionChecker.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		OBJ_AppRef /* TradingCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TradingCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_AppSwiftRef /* TradingCalculatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingCalculatorApp.swift; sourceTree = "<group>"; };
+		OBJ_AssetsRef /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		OBJ_BaseLocRef /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		OBJ_ContentSwiftRef /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		OBJ_EnLocRef /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		OBJ_FirebaseSwiftRef /* FirebaseConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConfigurator.swift; sourceTree = "<group>"; };
+		OBJ_GooglePlistRef /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		OBJ_InfoPlistRef /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		OBJ_LogicSwiftRef /* CalculatorLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorLogic.swift; sourceTree = "<group>"; };
+		OBJ_PrivacyRef /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		OBJ_RuLocRef /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		OBJ_VersionSwiftRef /* VersionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionChecker.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		OBJ_Frameworks /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF_FIREBASE_CORE /* FirebaseCore in Frameworks */,
+				BF_FIREBASE_RC /* FirebaseRemoteConfig in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		OBJ_MainGroup = {
+			isa = PBXGroup;
+			children = (
+				OBJ_ProjectGroup /* TradingCalculator */,
+				OBJ_ProductsGroup /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		OBJ_ProductsGroup /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_AppRef /* TradingCalculator.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		OBJ_ProjectGroup /* TradingCalculator */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_AppSwiftRef /* TradingCalculatorApp.swift */,
+				OBJ_ContentSwiftRef /* ContentView.swift */,
+				OBJ_LogicSwiftRef /* CalculatorLogic.swift */,
+				OBJ_FirebaseSwiftRef /* FirebaseConfigurator.swift */,
+				OBJ_VersionSwiftRef /* VersionChecker.swift */,
+				OBJ_InfoPlistRef /* Info.plist */,
+				OBJ_PrivacyRef /* PrivacyInfo.xcprivacy */,
+				OBJ_AssetsRef /* Assets.xcassets */,
+				OBJ_BaseLocRef /* Localizable.strings */,
+				OBJ_RuLocRef /* Localizable.strings */,
+				OBJ_EnLocRef /* Localizable.strings */,
+				OBJ_GooglePlistRef /* GoogleService-Info.plist */,
+			);
+			path = TradingCalculator;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		OBJ_Target /* TradingCalculator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_TargetConfigList /* Build configuration list for PBXNativeTarget "TradingCalculator" */;
+			buildPhases = (
+				OBJ_Sources /* Sources */,
+				OBJ_Frameworks /* Frameworks */,
+				OBJ_Resources /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TradingCalculator;
+			packageProductDependencies = (
+				PROD_FIREBASE_CORE /* FirebaseCore */,
+				PROD_FIREBASE_RC /* FirebaseRemoteConfig */,
+			);
+			productName = TradingCalculator;
+			productReference = OBJ_AppRef /* TradingCalculator.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		OBJ_Project /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					OBJ_Target = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = OBJ_ProjectConfigList /* Build configuration list for PBXProject "TradingCalculator" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				ru,
+			);
+			mainGroup = OBJ_MainGroup;
+			productRefGroup = OBJ_ProductsGroup /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			packageReferences = (
+				PACKAGE_FIREBASE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
+			targets = (
+				OBJ_Target /* TradingCalculator */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		OBJ_Resources /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				OBJ_Assets /* Assets.xcassets in Resources */,
+				OBJ_Privacy /* PrivacyInfo.xcprivacy in Resources */,
+				OBJ_BaseLoc /* Localizable.strings in Resources */,
+				OBJ_RuLoc /* Localizable.strings in Resources */,
+				OBJ_EnLoc /* Localizable.strings in Resources */,
+				OBJ_GooglePlist /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+
+/* Begin PBXSourcesBuildPhase section */
+		OBJ_Sources /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				OBJ_AppSwift /* TradingCalculatorApp.swift in Sources */,
+				OBJ_ContentSwift /* ContentView.swift in Sources */,
+				OBJ_LogicSwift /* CalculatorLogic.swift in Sources */,
+				OBJ_FirebaseSwift /* FirebaseConfigurator.swift in Sources */,
+				OBJ_VersionSwift /* VersionChecker.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		OBJ_Debug /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 2BZJ3QW58S;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = TradingCalculator/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = sad.TradingCalculator;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		OBJ_Release /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 2BZJ3QW58S;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = TradingCalculator/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = sad.TradingCalculator;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		OBJ_ProjectConfigList /* Build configuration list for PBXProject "TradingCalculator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_Debug /* Debug */,
+				OBJ_Release /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_TargetConfigList /* Build configuration list for PBXNativeTarget "TradingCalculator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_Debug /* Debug */,
+				OBJ_Release /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		PACKAGE_FIREBASE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		PROD_FIREBASE_CORE /* FirebaseCore */ = {isa = XCSwiftPackageProductDependency; productName = FirebaseCore; package = PACKAGE_FIREBASE; };
+		PROD_FIREBASE_RC /* FirebaseRemoteConfig */ = {isa = XCSwiftPackageProductDependency; productName = FirebaseRemoteConfig; package = PACKAGE_FIREBASE; };
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = OBJ_Project /* Project object */;
+}

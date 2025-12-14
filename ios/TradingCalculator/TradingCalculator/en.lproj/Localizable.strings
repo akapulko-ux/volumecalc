@@ -1,0 +1,20 @@
+"volume_title" = "Trade Volume";
+"stop_amount" = "Stop amount";
+"stop_amount_help" = "Fixed stop value for calculations ($)";
+"percent" = "Percent";
+"percent_help" = "Percent to compute position size (% of stop)";
+"result" = "Position size";
+"result_formula" = "Formula: Stop amount / 0.0n%";
+"placeholder_amount" = "0.00";
+"copied" = "Copied";
+"copy" = "Copy";
+"theme_light" = "Switch to light theme";
+"theme_dark" = "Switch to dark theme";
+"language_button" = "Change language";
+"update_required_title" = "Update required";
+"update_required_message" = "A newer version is required to continue. Please update the app.";
+"update_required_version" = "Minimum version:";
+"update_now" = "Update";
+
+
+

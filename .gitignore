@@ -1,0 +1,12 @@
+# Xcode user-specific
+xcuserdata/
+*.xcuserstate
+
+# Build artifacts
+DerivedData/
+
+# Swift Package Manager
+.swiftpm/
+Package.resolved
+
+

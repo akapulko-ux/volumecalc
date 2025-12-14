@@ -1,4 +1,7 @@
 import SwiftUI
+#if os(macOS)
+import AppKit
+#endif
 
 struct ContentView: View {
     @State private var stopAmount: String = ""
@@ -37,7 +40,7 @@ struct ContentView: View {
                 .padding(.vertical, 32)
             }
         }
-        .allowsHitTesting(!updateRequired)
+        .allowsHitTesting(!updateRequired && !showHelp && !showDonate)
         .onTapGesture {
             focusedField = nil
         }
@@ -49,10 +52,43 @@ struct ContentView: View {
         .overlay(alignment: .bottomTrailing) {
             helpButton
         }
+        #if os(macOS) || targetEnvironment(macCatalyst)
+        .overlay {
+            macOverlays
+        }
+        #else
         .sheet(isPresented: $showHelp) {
             helpSheet
         }
+        .sheet(isPresented: $showDonate) {
+            DonateView()
+        }
+        #endif
         .preferredColorScheme(preferredColorScheme)
+#if os(macOS)
+        .onChange(of: stopAmount) { _, newValue in
+            let cleaned = sanitizeNumeric(newValue)
+            if cleaned != stopAmount {
+                stopAmount = cleaned
+                return
+            }
+            calculate()
+        }
+        .onChange(of: percent) { _, newValue in
+            let cleaned = sanitizeNumeric(newValue)
+            if cleaned != percent {
+                percent = cleaned
+                return
+            }
+            enforcePercentLimit(cleaned)
+            calculate()
+        }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active {
+                Task { await performVersionCheck() }
+            }
+        }
+#else
         .onChange(of: stopAmount) { newValue in
             let cleaned = sanitizeNumeric(newValue)
             if cleaned != stopAmount {
@@ -70,14 +106,15 @@ struct ContentView: View {
             enforcePercentLimit(cleaned)
             calculate()
         }
-        .environment(\.locale, Locale(identifier: appLanguage))
-        .task {
-            await performVersionCheck()
-        }
         .onChange(of: scenePhase) { phase in
             if phase == .active {
                 Task { await performVersionCheck() }
             }
+        }
+#endif
+        .environment(\.locale, Locale(identifier: appLanguage))
+        .task {
+            await performVersionCheck()
         }
     }
 
@@ -367,69 +404,8 @@ struct ContentView: View {
     private var helpSheet: some View {
         NavigationView {
             ScrollView {
-                VStack(alignment: .leading, spacing: 12) {
-                    Text(LocalizedStringKey("help_title"))
-                        .font(.title2.bold())
-                        .multilineTextAlignment(.leading)
-                        .fixedSize(horizontal: false, vertical: true)
-
-                    Text(LocalizedStringKey("help_stop_title"))
-                        .font(.headline)
-                    Text(LocalizedStringKey("help_stop_text"))
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-
-                    Text(LocalizedStringKey("help_percent_title"))
-                        .font(.headline)
-                        .padding(.top, 8)
-                    Text(LocalizedStringKey("help_percent_text"))
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-
-                    Text(LocalizedStringKey("help_tv_title"))
-                        .font(.headline)
-                        .padding(.top, 8)
-                    Text(LocalizedStringKey("help_tv_text"))
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-
-                    Text(LocalizedStringKey("help_bybit_title"))
-                        .font(.headline)
-                        .padding(.top, 8)
-                    Text(LocalizedStringKey("help_bybit_text"))
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-
-                    Divider().padding(.vertical, 8)
-
-                    Image("helpScreenshot")
-                        .resizable()
-                        .scaledToFit()
-                        .cornerRadius(12)
-                        .shadow(color: .black.opacity(0.12), radius: 6, x: 0, y: 4)
-
-                    Button(action: { showDonate = true }) {
-                        Text(LocalizedStringKey("donate_button"))
-                            .font(.headline)
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 12)
-                            .frame(maxWidth: .infinity)
-                            .background(Color.blue.opacity(0.15))
-                            .foregroundColor(Color.blue)
-                            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-                    }
-                    .padding(.top, 8)
-
-                    HStack(spacing: 4) {
-                        Text(LocalizedStringKey("app_version_label"))
-                        Text(appVersion)
-                    }
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .padding(.top, 8)
-                }
-                .padding()
+                helpContentBody
+                    .padding()
             }
             .navigationTitle(LocalizedStringKey("help_nav_title"))
             .toolbar {
@@ -442,6 +418,149 @@ struct ContentView: View {
             .sheet(isPresented: $showDonate) {
                 DonateView()
             }
+        }
+    }
+
+#if os(macOS) || targetEnvironment(macCatalyst)
+    private var macOverlays: some View {
+        ZStack {
+            if showHelp || showDonate {
+                Color.black.opacity(0.45).ignoresSafeArea()
+            }
+
+            if showHelp {
+                macHelpOverlay
+                    .frame(maxWidth: 780, maxHeight: 780)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            }
+
+            if showDonate {
+                macDonateOverlay
+                    .frame(maxWidth: 720, maxHeight: 720)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            }
+        }
+    }
+
+    private var macHelpOverlay: some View {
+        VStack(spacing: 0) {
+            HStack {
+                Text(LocalizedStringKey("help_nav_title"))
+                    .font(.title3.bold())
+                Spacer()
+                Button(LocalizedStringKey("close")) {
+                    showHelp = false
+                }
+            }
+            .padding([.top, .horizontal], 16)
+
+            ScrollView {
+                helpContentBody
+                    .padding(16)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        }
+        .frame(maxWidth: min(680, NSScreen.main?.visibleFrame.width ?? 700 - 40),
+               maxHeight: min(720, NSScreen.main?.visibleFrame.height ?? 760 - 80))
+        .background(
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .fill(Color(NSColor.windowBackgroundColor))
+                .shadow(color: .black.opacity(0.2), radius: 16, x: 0, y: 8)
+        )
+        .padding()
+    }
+
+    private var macDonateOverlay: some View {
+        VStack(spacing: 16) {
+            HStack {
+                Text(LocalizedStringKey("donate_title"))
+                    .font(.title3.bold())
+                Spacer()
+                Button(LocalizedStringKey("close")) {
+                    showDonate = false
+                }
+            }
+            .padding(.horizontal, 16)
+            .padding(.top, 16)
+
+            DonateViewContent(copied: $copied)
+                .padding(.horizontal, 16)
+                .padding(.bottom, 16)
+        }
+        .frame(maxWidth: min(600, NSScreen.main?.visibleFrame.width ?? 640 - 40),
+               maxHeight: min(560, NSScreen.main?.visibleFrame.height ?? 640 - 80))
+        .background(
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .fill(Color(NSColor.windowBackgroundColor))
+                .shadow(color: .black.opacity(0.2), radius: 16, x: 0, y: 8)
+        )
+        .padding()
+    }
+#endif
+
+    private var helpContentBody: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text(LocalizedStringKey("help_title"))
+                .font(.title2.bold())
+                .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Text(LocalizedStringKey("help_stop_title"))
+                .font(.headline)
+            Text(LocalizedStringKey("help_stop_text"))
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+
+            Text(LocalizedStringKey("help_percent_title"))
+                .font(.headline)
+                .padding(.top, 8)
+            Text(LocalizedStringKey("help_percent_text"))
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+
+            Text(LocalizedStringKey("help_tv_title"))
+                .font(.headline)
+                .padding(.top, 8)
+            Text(LocalizedStringKey("help_tv_text"))
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+
+            Text(LocalizedStringKey("help_bybit_title"))
+                .font(.headline)
+                .padding(.top, 8)
+            Text(LocalizedStringKey("help_bybit_text"))
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+
+            Divider().padding(.vertical, 8)
+
+            Image("helpScreenshot")
+                .resizable()
+                .scaledToFit()
+                .cornerRadius(12)
+                .shadow(color: .black.opacity(0.12), radius: 6, x: 0, y: 4)
+                .padding(.vertical, 4)
+
+            Button(action: { showDonate = true }) {
+                Text(LocalizedStringKey("donate_button"))
+                    .font(.headline)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 12)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue.opacity(0.15))
+                    .foregroundColor(Color.blue)
+                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            }
+            .padding(.top, 8)
+
+            HStack(spacing: 4) {
+                Text(LocalizedStringKey("app_version_label"))
+                Text(appVersion)
+            }
+            .font(.footnote)
+            .foregroundColor(.secondary)
+            .frame(maxWidth: .infinity, alignment: .center)
+            .padding(.top, 8)
         }
     }
 }
@@ -475,52 +594,8 @@ struct DonateView: View {
 
     var body: some View {
         NavigationView {
-            VStack(spacing: 16) {
-                Image("QRcode")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(maxWidth: 260)
-                    .cornerRadius(16)
-                    .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 4)
-
-                Text(LocalizedStringKey("donate_message"))
-                    .font(.body)
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.secondary)
-                    .padding(.horizontal)
-
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(LocalizedStringKey("donate_wallet_label"))
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-
-                    HStack(spacing: 12) {
-                        Text(walletAddress)
-                            .font(.system(.body, design: .monospaced))
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.6)
-                        Spacer()
-                        Button(action: copyWallet) {
-                            Image(systemName: "doc.on.doc")
-                                .font(.system(size: 18, weight: .semibold))
-                        }
-                        .accessibilityLabel(LocalizedStringKey("donate_copy"))
-                    }
-                    .padding(12)
-                    .background(Color.gray.opacity(0.12))
-                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-
-                    if copied {
-                        Text(LocalizedStringKey("donate_copied"))
-                            .font(.footnote)
-                            .foregroundColor(.green)
-                    }
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-
-                Spacer()
-            }
-            .padding()
+            DonateViewContent(copied: $copied)
+                .padding()
             .navigationTitle(LocalizedStringKey("donate_title"))
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -531,10 +606,64 @@ struct DonateView: View {
             }
         }
     }
+}
+
+struct DonateViewContent: View {
+    @Binding var copied: Bool
+    private let walletAddress = "TQYNfMQerVw9TxJKF9dT3ABAoXSAszwhSp"
+
+    var body: some View {
+        VStack(spacing: 16) {
+            Image("QRcode")
+                .resizable()
+                .scaledToFit()
+                .frame(maxWidth: 260)
+                .cornerRadius(16)
+                .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 4)
+
+            Text(LocalizedStringKey("donate_message"))
+                .font(.body)
+                .multilineTextAlignment(.center)
+                .foregroundColor(.secondary)
+                .padding(.horizontal)
+
+            VStack(alignment: .leading, spacing: 8) {
+                Text(LocalizedStringKey("donate_wallet_label"))
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+
+                HStack(spacing: 12) {
+                    Text(walletAddress)
+                        .font(.system(.body, design: .monospaced))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.6)
+                    Spacer()
+                    Button(action: copyWallet) {
+                        Image(systemName: "doc.on.doc")
+                            .font(.system(size: 18, weight: .semibold))
+                    }
+                    .accessibilityLabel(LocalizedStringKey("donate_copy"))
+                }
+                .padding(12)
+                .background(Color.gray.opacity(0.12))
+                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+
+                if copied {
+                    Text(LocalizedStringKey("donate_copied"))
+                        .font(.footnote)
+                        .foregroundColor(.green)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
 
     private func copyWallet() {
         #if canImport(UIKit)
         UIPasteboard.general.string = walletAddress
+        #elseif os(macOS)
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(walletAddress, forType: .string)
         #endif
         copied = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {

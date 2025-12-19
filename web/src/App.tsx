@@ -248,7 +248,7 @@ function App() {
           <ScrollArea className="max-h-[70vh] pr-2">
             <div className="grid gap-4 pb-2 sm:pb-4">
               <img
-                src="/QRcode.png"
+                src="QRcode.png"
                 alt="Donate QR"
                 className="w-full max-w-xs self-center rounded-2xl shadow-card"
               />
@@ -500,7 +500,7 @@ function HelpContent({ locale, appVersion }: HelpContentProps) {
       <Section title={locale.help_bybit_title} text={locale.help_bybit_text} />
       <div className="py-2">
         <img
-          src="/helpScreenshot.png"
+          src="helpScreenshot.png"
           alt="Help screenshot"
           className="w-full rounded-2xl shadow-card"
         />

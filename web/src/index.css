@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-:root {
+  :root {
     --background: 213 100% 97%;
     --foreground: 220 15% 15%;
     --muted: 220 16% 92%;
@@ -42,13 +42,18 @@
     --accent: 222 14% 18%;
     --accent-foreground: 0 0% 100%;
     --ring: 217 92% 70%;
-}
+  }
 
   * {
     @apply border-border;
-}
+  }
 
-body {
+  body {
     @apply bg-background text-foreground antialiased;
+  }
+
+  #root {
+    width: 100%;
+    min-height: 100vh;
   }
 }

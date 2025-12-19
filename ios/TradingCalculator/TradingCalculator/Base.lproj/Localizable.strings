@@ -33,5 +33,7 @@
 "donate_wallet_label" = "Wallet address";
 "donate_copy" = "Copy";
 "donate_copied" = "Copied!";
+"donate_chat_note" = "For suggestions or feedback, join the Telegram support chat:";
+"donate_chat_link" = "Open Telegram chat";
 
 

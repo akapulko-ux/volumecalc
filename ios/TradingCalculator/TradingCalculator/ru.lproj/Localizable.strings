@@ -33,5 +33,7 @@
 "donate_wallet_label" = "Адрес кошелька";
 "donate_copy" = "Скопировать";
 "donate_copied" = "Скопировано!";
+"donate_chat_note" = "Для предложений или замечаний — переходите в телеграм-чат поддержки:";
+"donate_chat_link" = "Открыть чат в Telegram";
 
 

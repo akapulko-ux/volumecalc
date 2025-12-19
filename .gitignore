@@ -10,3 +10,19 @@ DerivedData/
 Package.resolved
 
 
+
+
+
+# Local Netlify folder
+.netlify
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# npm cache
+.npm-cache/
+
+
+

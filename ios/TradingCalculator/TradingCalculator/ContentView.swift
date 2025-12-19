@@ -541,18 +541,6 @@ struct ContentView: View {
                 .shadow(color: .black.opacity(0.12), radius: 6, x: 0, y: 4)
                 .padding(.vertical, 4)
 
-            Button(action: { showDonate = true }) {
-                Text(LocalizedStringKey("donate_button"))
-                    .font(.headline)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 12)
-                    .frame(maxWidth: .infinity)
-                    .background(Color.blue.opacity(0.15))
-                    .foregroundColor(Color.blue)
-                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-            }
-            .padding(.top, 8)
-
             HStack(spacing: 4) {
                 Text(LocalizedStringKey("app_version_label"))
                 Text(appVersion)
@@ -611,6 +599,7 @@ struct DonateView: View {
 struct DonateViewContent: View {
     @Binding var copied: Bool
     private let walletAddress = "TQYNfMQerVw9TxJKF9dT3ABAoXSAszwhSp"
+    private let chatURL = URL(string: "https://t.me/+n9T7BbQkG3FiMTA6")
 
     var body: some View {
         VStack(spacing: 16) {
@@ -655,6 +644,19 @@ struct DonateViewContent: View {
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
+
+            VStack(alignment: .leading, spacing: 6) {
+                Text(LocalizedStringKey("donate_chat_note"))
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.leading)
+
+                if let chatURL {
+                    Link(LocalizedStringKey("donate_chat_link"), destination: chatURL)
+                        .font(.headline)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+            }
         }
     }
 

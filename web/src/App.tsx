@@ -163,7 +163,7 @@ function App() {
   return (
     <div
       className={cn(
-        "min-h-screen w-full bg-gradient-to-br",
+        "min-h-screen w-full bg-gradient-to-br flex justify-center items-start lg:items-center",
         gradientClass,
       )}
     >

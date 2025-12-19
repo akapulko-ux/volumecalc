@@ -9,4 +9,18 @@ DerivedData/
 .swiftpm/
 Package.resolved
 
+# Node modules
+node_modules/
+.npm-cache/
+
+# Environment files
+.env
+.env.local
+
+# Netlify
+.netlify/
+
+# IDE
+.cursor/
+
 

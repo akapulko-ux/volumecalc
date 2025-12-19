@@ -167,7 +167,7 @@ function App() {
         gradientClass,
       )}
     >
-      <div className="mx-auto max-w-6xl px-4 py-8 lg:py-12">
+      <div className="mx-auto max-w-6xl px-4 pt-4 pb-10 lg:pt-6 lg:pb-12">
         <div className="flex items-start justify-between gap-4">
           <HeaderCard
             locale={locale}

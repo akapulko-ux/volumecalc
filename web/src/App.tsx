@@ -163,11 +163,11 @@ function App() {
   return (
     <div
       className={cn(
-        "min-h-screen w-full bg-gradient-to-br flex justify-center items-start lg:items-center",
+        "min-h-screen w-full bg-gradient-to-br",
         gradientClass,
       )}
     >
-      <div className="container max-w-6xl py-8 lg:py-12">
+      <div className="mx-auto max-w-6xl px-4 py-8 lg:py-12">
         <div className="flex items-start justify-between gap-4">
           <HeaderCard
             locale={locale}
